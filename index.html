@@ -11,21 +11,37 @@
     <!-- js Libs -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js" defer></script>
+
     <!-- Firebase Links -->
     <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-app.js" defer></script>
-    <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-auth.js" defer></script>
+    <!-- <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-auth.js" defer></script> -->
     <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-database.js" defer></script>
-    
-    <script src="assets/js/app.js" defer></script>
 
+    <!-- Custom Styles -->
     <link rel="stylesheet" href="assets/css/style.css">
     <title>Document</title>
 </head>
+
 <body>
     
     <!-- Sign in / Out buttons -can be placed anywhere, one is usually hidden at all times- --> 
-    <button id="signIn" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">Sign In</button>
-    <button id="signOut" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Sign Out</button>
+    <!-- <button id="signIn" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">Sign In</button>
+        <button id="signOut" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Sign Out</button> -->
+        
+        <p>YouTube Data API Quickstart</p>
+        
+        <!--Add buttons to initiate auth sequence and sign out-->
+        <button id="authorize-button" style="display: none;">Authorize</button>
+        <button id="signout-button" style="display: none;">Sign Out</button>
+        
+        <pre id="content"></pre>
+        
+        
+        
+        <!-- <script src="assets/js/app.js" defer></script> -->
+        <script src="assets/js/gAuth2.js"></script><!--Cannot be 'defer'-->
+        <!-- Google Api for client and auth 2 -->
+        <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
 
 </body>
 </html>

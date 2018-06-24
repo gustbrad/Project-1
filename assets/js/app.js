@@ -1,19 +1,19 @@
-var config = {
+const config = {
     apiKey: "AIzaSyDi0DWfWqD-EyT4HYOVURLP-5HoD4iInIQ",
     authDomain: "playlist-30555.firebaseapp.com",
     databaseURL: "https://playlist-30555.firebaseio.com",
     projectId: "playlist-30555",
     storageBucket: "",
     messagingSenderId: "752707560404"
-  };
-  firebase.initializeApp(config);
-  const gSignIn = new firebase.auth.GoogleAuthProvider();
-  
-  const signInBtn = $('#signIn');
-  const signOutBtn = $('#signOut');
-  // const appDiv = $('.app');//TODO: get div id/class uncomment: 14, 16, 38-44, 84, 66
-  isSignedIn();
-  // display();
+};
+firebase.initializeApp(config);
+const gSignIn = new firebase.auth.GoogleAuthProvider();
+
+const signInBtn = $('#signIn');
+const signOutBtn = $('#signOut');
+// const appDiv = $('.app');//TODO: get div id/class uncomment: 14, 16, 38-44, 84, 66
+isSignedIn();
+// display();
   
 function getName() {
 	let niceName = sessionStorage.getItem('niceName');
@@ -24,7 +24,7 @@ function getName() {
 
 function isSignedIn() {
 	let signedIn = sessionStorage.getItem('userSignedIn');
-	if(!signedIn || signedIn === null) {
+	if(!sessionStorage['userSignedIn'] || signedIn === null) {
 		signInBtn.show();
 		signOutBtn.hide();
 		return true;
@@ -41,7 +41,6 @@ function isSignedIn() {
 // 		.append($('<span>').text('!')));	
 // }
 
-
 /**
  * Sign In / Out functions for google auth
  */
@@ -51,7 +50,6 @@ function signInPopup() {
 		.then(res => {
 			let {credential, user} = res;
 			let token = credential.accessToken;
-			// console.log(token, user.displayName)
 			signInBtn.hide();
 			signOutBtn.show();
 			sessionStorage.setItem('userSignedIn', true);

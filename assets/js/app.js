@@ -5,8 +5,10 @@ const config = {
     projectId: "playlist-30555",
 };
 firebase.initializeApp(config);
-let usersChannel = {
-  id: '',
-  title: '',
-  views: ''
-}
+
+let usersChannel = { //Object for default user todo: need to populate this when we log the user in
+  id: null,
+  title: 'Guest',
+  views: null,
+  playlists: []
+};

@@ -14,7 +14,7 @@ let DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/youtube/v3/r
 // separated them with spaces.
 const SCOPES = 'https://www.googleapis.com/auth/youtube.force-ssl';
 
-const authorizeButton = $('#authorize-button').hide();
+const authorizeButton = $('#authorize-button');
 const signoutButton = $('#signout-button').hide();
 
 /**
@@ -82,7 +82,14 @@ function getPlaylists() {
 		'part': 'snippet, contentDetails',
 		'mine': 'true'
 	}).then(res => {
-		console.log(res)
+    for (let playlist of res.result.items) {
+      if(playlist.kind === 'youtube#playlist') {
+
+        console.log(playlist.id)
+      }
+    }
+    let {id, kind, snippet, statistics, contentDetails} = res.result.items[0];
+
 	}).catch(err => console.log(err));
 }
 
@@ -91,6 +98,7 @@ function getChannel() {
 		'part': 'snippet,contentDetails,statistics',
 		'mine': 'true'
 	}).then(res => {
-		console.log(res)
+    let {id, kind, snippet, statistics, contentDetails} = res.result.items[0];
+		//console.log(kind, snippet, statistics, contentDetails.relatedPlaylists)
 	}).catch(err => console.log(err));
 }

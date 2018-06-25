@@ -14,8 +14,8 @@ let DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/youtube/v3/r
 // separated them with spaces.
 const SCOPES = 'https://www.googleapis.com/auth/youtube.force-ssl';
 
-const authorizeButton = document.getElementById('authorize-button');
-const signoutButton = document.getElementById('signout-button');
+const authorizeButton = $('#authorize-button').hide();
+const signoutButton = $('#signout-button').hide();
 
 /**
  *  On load, called to load the auth2 library and API client library.
@@ -39,8 +39,8 @@ function initClient() {
 
     // Handle the initial sign-in state.
     updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-    authorizeButton.onclick = handleAuthClick;
-    signoutButton.onclick = handleSignoutClick;
+    authorizeButton.on('click', handleAuthClick);
+    signoutButton.on('click', handleSignoutClick);
   });
 }
 
@@ -50,12 +50,13 @@ function initClient() {
  */
 function updateSigninStatus(isSignedIn) {
   if (isSignedIn) {
-    authorizeButton.style.display = 'none';
-    signoutButton.style.display = 'block';
+    authorizeButton.hide();
+    signoutButton.show();
+    getPlaylists();
     getChannel();
   } else {
-    authorizeButton.style.display = 'block';
-    signoutButton.style.display = 'none';
+    authorizeButton.show();
+    signoutButton.hide();
   }
 }
 
@@ -74,29 +75,22 @@ function handleSignoutClick(event) {
 }
 
 /**
- * Append text to a pre element in the body, adding the given message
- * to a text node in that element. Used to display info from API response.
- *
- * @param {string} message Text to be placed in pre element.
- */
-function appendPre(message) {
-  let pre = document.getElementById('content');
-  let textContent = document.createTextNode(message + '\n');
-  pre.appendChild(textContent);
-}
-
-/**
  * Print files.
  */
+function getPlaylists() {
+	gapi.client.youtube.playlists.list({
+		'part': 'snippet, contentDetails',
+		'mine': 'true'
+	}).then(res => {
+		console.log(res)
+	}).catch(err => console.log(err));
+}
+
 function getChannel() {
-  gapi.client.youtube.channels.list({
-    'part': 'snippet,contentDetails,statistics',
-    'mine': 'true'
-  }).then(function(response) {
-      console.log(response)
-    let channel = response.result.items[0];
-    appendPre('This channel\'s ID is ' + channel.id + '. ' +
-              'Its title is \'' + channel.snippet.title + ', ' +
-              'and it has ' + channel.statistics.viewCount + ' views.');
-  });
+	gapi.client.youtube.channels.list({
+		'part': 'snippet,contentDetails,statistics',
+		'mine': 'true'
+	}).then(res => {
+		console.log(res)
+	}).catch(err => console.log(err));
 }

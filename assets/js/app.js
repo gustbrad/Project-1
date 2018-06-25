@@ -5,3 +5,8 @@ const config = {
     projectId: "playlist-30555",
 };
 firebase.initializeApp(config);
+let usersChannel = {
+  id: '',
+  title: '',
+  views: ''
+}

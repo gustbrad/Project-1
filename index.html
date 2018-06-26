@@ -17,22 +17,74 @@
     <!-- <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-auth.js" defer></script> -->
     <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-database.js" defer></script>
 
+    <!-- Material Design Lite -->
+    <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <!-- Material Design icon font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
     <!-- Custom Styles -->
     <link rel="stylesheet" href="assets/css/style.css">
     <title>Document</title>
 </head>
 
 <body>
+
+    <!-- Uses a transparent header that draws on top of the layout's background -->
+    <div class="demo-layout-transparent mdl-layout mdl-js-layout">
+            <header class="mdl-layout__header mdl-layout__header--transparent">
+              <div class="mdl-layout__header-row">
+                <!-- Title -->
+                <span class="mdl-layout-title">&lt;MEH/></span>
+                <!-- Add spacer, to align navigation to the right -->
+                <div class="mdl-layout-spacer"></div>
+                <!-- Navigation -->
+                <nav class="mdl-navigation">
+                  <!-- Sign in / Out buttons -can be placed anywhere, one is usually hidden at all times- --> 
+                  <!--Add buttons to initiate auth sequence and sign out-->
+                  <form action="#">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                          <input class="mdl-textfield__input" type="text" id="sample3">
+                          <label class="mdl-textfield__label" for="sample3">Search...</label>
+                        </div>
+                      </form>
+                  <label class="mdl-button mdl-js-button mdl-button--icon"
+                  for="fixed-header-drawer-exp">
+                  <i class="material-icons">search</i>
+                  </label>
+                  <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="authorize-button">Authorize</button>
+                  <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="signout-button">Sign Out</button>
+                  </nav>
+              </div>
+            </header>
+            <div class="mdl-layout__drawer">
+              <span class="mdl-layout-title">Title</span>
+              <nav class="mdl-navigation">
+                <a class="mdl-navigation__link" href="">Link</a>
+                <a class="mdl-navigation__link" href="">Link</a>
+                <a class="mdl-navigation__link" href="">Link</a>
+                <a class="mdl-navigation__link" href="">Link</a>
+              </nav>
+            </div>
+            <main class="mdl-layout__content">
+         
+
+
+
+
+
+
+
+
     
-    <!-- Sign in / Out buttons -can be placed anywhere, one is usually hidden at all times- --> 
-        <!--Add buttons to initiate auth sequence and sign out-->
-        <button id="authorize-button">Authorize</button>
-        <button id="signout-button">Sign Out</button>
+   
+       
+       
 
         
 
         <script src="assets/js/app.js" defer></script>
-        <script src="assets/js/gapi.js" defer></script><!--Cannot be 'defer'-->
+        <script src="assets/js/gapi.js"></script><!--Cannot be 'defer'-->
         <!-- Google Api for client and auth 2 -->
         <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
 

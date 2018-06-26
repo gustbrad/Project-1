@@ -1,25 +1,13 @@
-/**{
-    'apiKey': 'AIzaSyDi0DWfWqD-EyT4HYOVURLP-5HoD4iInIQ',
-    'discoveryDocs': [discoveryUrl],
-    'clientId': '752707560404-jchjt85k7q6ieq2vqvc810e3akjr2o8m.apps.googleusercontent.com',
-    'scope': SCOPE
-}*/
-// Client ID and API key from the Developer Console
 const CLIENT_ID = '752707560404-jchjt85k7q6ieq2vqvc810e3akjr2o8m.apps.googleusercontent.com';
 
-// Array of API discovery doc URLs for APIs used by the quickstart
 let DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"];
 
-// Authorization scopes required by the API. If using multiple scopes,
-// separated them with spaces.
 const SCOPES = 'https://www.googleapis.com/auth/youtube.force-ssl';
 
 const authorizeButton = $('#authorize-button');
 const signoutButton = $('#signout-button').hide();
-// We need to reauth a user every hour when their O-Auth2 token expires
-/**
- *  On load, called to load the auth2 library and API client library.
- */
+// todo: We need to reauth a user every hour when their O-Auth2 token expires
+
 function handleClientLoad() {
   gapi.load('client:auth2', initClient);
 }
@@ -60,23 +48,15 @@ function updateSigninStatus(isSignedIn) {
   }
 }
 
-/**
- *  Sign in the user upon button click.
- */
 function handleAuthClick(event) {
   gapi.auth2.getAuthInstance().signIn();
 }
 
-/**
- *  Sign out the user upon button click.
- */
 function handleSignoutClick(event) {
   gapi.auth2.getAuthInstance().signOut();
 }
 
-/**
- * Print files.
- */
+
 function getPlaylistItems() {
   console.log(usersChannel.playlists[0].id)
   gapi.client.youtube.playlistItems.list({
@@ -115,6 +95,6 @@ function getChannel() {
     usersChannel.title = snippet.title;
     usersChannel.id = id;
     usersChannel.views = statistics.viewCount;
-		//console.log(kind, snippet, statistics, contentDetails.relatedPlaylists)
+		console.log(usersChannel)
 	}).catch(err => console.log(err));
 }

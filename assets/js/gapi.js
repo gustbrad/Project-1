@@ -40,7 +40,7 @@ function updateSigninStatus(isSignedIn) {
 	if (isSignedIn) {
 		authorizeButton.hide();
 		signoutButton.show();
-		getPlaylists();
+		// getPlaylists();
 		getChannel();
 	} else {
 		authorizeButton.show();
@@ -86,19 +86,16 @@ function getPlaylists() {
 	}).catch(err => console.log(err));
 }
 function searchYt(e) {
-	e.preventDefault();
-	let q = searchInput.val().trim() || ' ';
-	console.log('hello')
-	displayResults(results)
+  if(e) {
+    e.preventDefault();
+  }
+	let q = searchInput.val().trim() || 'cats';
 	gapi.client.youtube.search.list({
 		'part': 'snippet',
 		'q': q
 	}).then(res => {
-		let { id, kind, snippet, statistics, contentDetails } = res.result.items[0];
-		usersChannel.title = snippet.title;
-		usersChannel.id = id;
-		usersChannel.views = statistics.viewCount;
-		console.log(usersChannel)
+    displayResults(res.result.items);
+    searchInput.val('')
 	}).catch(err => console.log(err));
 }
 

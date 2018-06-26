@@ -21,3 +21,30 @@ color: white;
   #sample3 {
       color:white;
   }
+
+
+/** Classes for displaying youtube search results */
+#yt-search-results {
+  width: 30%;
+  overflow: auto;
+  height: 400px; /** I shouldnt hard-code this, just testing overflow scroll */
+  background: lightgray;
+  
+}
+
+.youtube-search-result {
+  background: ghostwhite;
+  margin: .2em .5em;
+}
+.youtube-search-result > h6 {
+  overflow: hidden;
+  word-wrap: none;
+  margin: 0;
+  padding: .2em;
+}
+
+/* .text-truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+} */

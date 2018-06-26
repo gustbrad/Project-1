@@ -44,13 +44,13 @@
                 <!--Add buttons to initiate auth sequence and sign out-->
                 <form action="#">
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" id="sample3">
+                        <input class="mdl-textfield__input" type="text" id="search-input">
                         <label class="mdl-textfield__label" for="sample3">Search...</label>
                     </div>
                     </form>
                 <label class="mdl-button mdl-js-button mdl-button--icon"
                 for="fixed-header-drawer-exp">
-                <i class="material-icons">search</i>
+                <i id="search-button" class="material-icons">search</i>
                 </label>
                 <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="authorize-button">Authorize</button>
                 <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="signout-button">Sign Out</button>
@@ -66,27 +66,14 @@
             <a class="mdl-navigation__link" href="">Link</a>
             </nav>
         </div>
-        <main class="mdl-layout__content">
+        <div id="yt-search-results"></div> <!--here for dev purposes-->
+        <main class="mdl-layout__content"></main>
         
-
-
-
-
-
-
-
-
-    
-   
-       
-       
-
-        
-
-        <script src="assets/js/app.js" defer></script>
-        <script src="assets/js/gapi.js"></script><!--Cannot be 'defer'-->
-        <!-- Google Api for client and auth 2 -->
-        <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
+    </div>
+    <script src="assets/js/app.js" defer></script>
+    <script src="assets/js/gapi.js"></script><!--Cannot be 'defer'-->
+    <!-- Google Api for client and auth 2 -->
+    <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
 
 </body>
 </html>

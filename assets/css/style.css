@@ -21,3 +21,25 @@ color: white;
   #sample3 {
       color:white;
   }
+
+  .demo-card-wide.mdl-card {
+      left: 20px;
+    width: 512px;
+  }
+  .demo-card-wide > .mdl-card__title {
+    color: #fff;
+    height: 60px;
+    background-color: white;
+  }
+  .demo-card-wide > .mdl-card__menu {
+    color: #fff;
+  }
+  
+  body {
+    padding: 20px;
+    background: #fafafa;
+    position: relative;
+  }
+  .mdl-card__title-text {
+color:blue;
+  }

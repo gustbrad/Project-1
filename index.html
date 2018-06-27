@@ -32,75 +32,61 @@
 
     <!-- Uses a transparent header that draws on top of the layout's background -->
     <div class="demo-layout-transparent mdl-layout mdl-js-layout">
-            <header class="mdl-layout__header mdl-layout__header--transparent">
-              <div class="mdl-layout__header-row">
+        <header class="mdl-layout__header mdl-layout__header--transparent">
+            <div class="mdl-layout__header-row">
                 <!-- Title -->
                 <span class="mdl-layout-title">&lt;MEH/></span>
                 <!-- Add spacer, to align navigation to the right -->
                 <div class="mdl-layout-spacer"></div>
                 <!-- Navigation -->
                 <nav class="mdl-navigation">
-                  <!-- Sign in / Out buttons -can be placed anywhere, one is usually hidden at all times- --> 
-                  <!--Add buttons to initiate auth sequence and sign out-->
-                  <form action="#">
+                    <!-- Sign in / Out buttons -can be placed anywhere, one is usually hidden at all times- --> 
+                    <!--Add buttons to initiate auth sequence and sign out-->
+                    <form action="#">
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                          <input class="mdl-textfield__input" type="text" id="sample search-input">
-                          <label class="mdl-textfield__label" for="sample3">Search...</label>
-                        </div>
-                      </form>
-                  <label class="mdl-button mdl-js-button mdl-button--icon"
-                  for="fixed-header-drawer-exp">
-                  <i class="material-icons" id="search-button">search</i>
-                  </label>
-                  <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="authorize-button">Authorize</button>
-                  <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="signout-button">Sign Out</button>
-                  </nav>
-              </div>
-            </header>
-            <div class="mdl-layout__drawer">
-              <span class="mdl-layout-title">Title</span>
-              <nav class="mdl-navigation">
-                <a class="mdl-navigation__link" href="">Link</a>
-                <a class="mdl-navigation__link" href="">Link</a>
-                <a class="mdl-navigation__link" href="">Link</a>
-                <a class="mdl-navigation__link" href="">Link</a>
-              </nav>
+                            <input class="mdl-textfield__input" type="text" id="search-input">
+                            <label class="mdl-textfield__label" for="search-input">Search...</label>
+                        </div>    
+                        <button class="mdl-button mdl-js-button mdl-button--icon">
+                            <i class="material-icons" id="search-button">search</i>
+                        </button>   
+                    </form>
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="authorize-button">Login</button>
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="signout-button">Sign Out</button>
+                </nav>
             </div>
+        </header>
+        <div class="mdl-layout__drawer">
+            <span class="mdl-layout-title">Title</span>
+            <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="">Link</a>
+            <a class="mdl-navigation__link" href="">Link</a>
+            <a class="mdl-navigation__link" href="">Link</a>
+            <a class="mdl-navigation__link" href="">Link</a>
+            </nav>
+        </div>
            <!-- Wide card with share menu button -->
         <div class="demo-card-wide mdl-card mdl-shadow--2dp">
             <div class="mdl-card__title">
               <h2 class="mdl-card__title-text">Results</h2>
             </div>
             <div class="mdl-card__actions mdl-card--border">
-              <br>
-              <br>
-              <br>
-              <br>
-              <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                Next Results
-              </a>
+                <div id="yt-search-results"></div>
+
+                <!-- should put these buttons in a div thats positioned at the bottom of the card -->
+                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect float-left">Prev</a>
+                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect float-right">Next</a>
+                <div class="clearfix"></div>
             </div>
         </div>
-         
-
-
-
-
-
-
-
-
-    
-   
-       
-       
-
         
 
-        <script src="assets/js/app.js" defer></script>
-        <script src="assets/js/gapi.js"></script><!--Cannot be 'defer'-->
-        <!-- Google Api for client and auth 2 -->
-        <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
+
+    </div>
+    <script src="assets/js/app.js" defer></script>
+    <script src="assets/js/gapi.js"></script><!--Cannot be 'defer'-->
+    <!-- Google Api for client and auth 2 -->
+    <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
 
 </body>
 </html>

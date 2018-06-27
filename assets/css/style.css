@@ -22,6 +22,27 @@ color: white;
     color:white;
 }
 
+.demo-card-wide.mdl-card {
+  left: 20px;
+  width: 512px;
+}
+.demo-card-wide > .mdl-card__title {
+  color: #fff;
+  height: 60px;
+  background-color: white;
+}
+.demo-card-wide > .mdl-card__menu {
+  color: #fff;
+}
+
+body {
+  background: #fafafa;
+  position: relative;
+}
+.mdl-card__title-text {
+  color:blue;
+}
+
 
 /** Classes for displaying youtube search results */
 #yt-search-results {
@@ -52,7 +73,7 @@ color: white;
   padding-left: .2em;
 }
 .result-description {
-  
+  display: block; /** just here to keep vs code happy */
 }
 .result-date-created {
   float: right;
@@ -62,10 +83,15 @@ color: white;
 }
 
 
-
 /** Helper Classes */
 .text-truncate {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.float-right {
+  float: right;
+}
+.float-left {
+  float: left;
 }

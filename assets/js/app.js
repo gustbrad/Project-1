@@ -10,6 +10,55 @@ const searchInput = $('#search-input');
 const searchResults = $('#yt-search-results')
 searchResults.hide();
 
+//Restrict search-input from having special characters
+$('#search-input').bind('keydown', function (event) {
+  switch (event.keyCode) {
+      case 8:  // Backspace
+      case 9:  // Tab
+      case 13: // Enter
+      case 37: // Left
+      case 38: // Up
+      case 39: // Right
+      case 40: // Down
+      break;
+      default:
+      var regex = new RegExp("^[a-zA-Z0-9.,/ $@]+$");
+      var key = event.key;
+      if (!regex.test(key)) {
+          event.preventDefault();
+          return false;
+      }
+      break;
+  }
+});
+//Prevent pasting  of special characters into search input
+$('#search-input').on({
+  keydown: function(e) {
+      if (e.which === 32 || e.which === 220) {
+          e.preventDefault();
+          var v = this.value,
+              s = this.selectionStart;
+          this.value = v.substr(0, s) + '' + v.substr(s, v.length);
+      }
+       if (e.which === 55) {
+          e.preventDefault();
+          var v = this.value,
+              s = this.selectionStart;
+          this.value = v.substr(0, s) + '7' + v.substr(s, v.length);
+      }
+  },
+  
+  paste: function(e) {
+      var stopPaste = function(){
+         this.value = this.value.replace(/[|&()\s]/g, '');
+      };
+                      
+      setTimeout(stopPaste.bind(this), 1);
+  }
+});
+
+
+
 let usersChannel = { //Object for default user todo: need to populate this when we log the user in
   id: null,
   title: 'Guest',

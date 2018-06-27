@@ -1,50 +1,71 @@
 .demo-layout-transparent {
-    background: url('https://getmdl.io/assets/demos/transparent.jpg') center / cover;
-  }
-  .demo-layout-transparent .mdl-layout__header,
-  .demo-layout-transparent .mdl-layout__drawer-button {
-    /* This background is dark, so we set text to white. Use 87% black instead if
-       your background is light. */
-    color: white;
-  }
+  background: url('https://getmdl.io/assets/demos/transparent.jpg') center / cover;
+}
+.demo-layout-transparent .mdl-layout__header,
+.demo-layout-transparent .mdl-layout__drawer-button {
+  /* This background is dark, so we set text to white. Use 87% black instead if
+      your background is light. */
+  color: white;
+}
 
-  .body {
-    padding: 20px;
-    background: #fafafa;
-    position: relative;
-  }
+.body {
+  padding: 20px;
+  background: #fafafa;
+  position: relative;
+}
 
-  .mdl-textfield__label {
+.mdl-textfield__label {
 color: white;
-  }
+}
 
-  #sample3 {
-      color:white;
-  }
+#sample3 {
+    color:white;
+}
 
 
 /** Classes for displaying youtube search results */
 #yt-search-results {
-  width: 30%;
+  padding: .2em;
+  width: 500px;
   overflow: auto;
   height: 400px; /** I shouldnt hard-code this, just testing overflow scroll */
   background: lightgray;
   
 }
-
 .youtube-search-result {
+  display: block;
+  width: max-content;
+  padding: .5em;
   background: ghostwhite;
-  margin: .2em .5em;
+  margin: .2em auto;
 }
-.youtube-search-result > h6 {
+.result-title {
   overflow: hidden;
   word-wrap: none;
   margin: 0;
-  padding: .2em;
+  text-decoration: underline;
+}
+.youtube-search-result-details {
+  float: right; 
+  width: 280px;
+  padding-right: .2em;
+  padding-left: .2em;
+}
+.result-description {
+  
+}
+.result-date-created {
+  float: right;
+}
+.result-creator {
+  float: left;
 }
 
-/* .text-truncate {
+
+
+/** Helper Classes */
+.text-truncate {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-} */
+}

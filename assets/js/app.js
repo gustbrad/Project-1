@@ -16,27 +16,32 @@ $('#search-input').bind('keydown', function (event) {
   switch (event.keyCode) {
       case 8:  // Backspace
       case 9:  // Tab
-      case 13: // Enter
+      case 32: // Space
       case 37: // Left
       case 38: // Up
       case 39: // Right
       case 40: // Down
         break;
       default:
-        var regex = new RegExp("^[a-zA-Z0-9.,/ $@]+$");
-        var key = event.key;
-        if (!regex.test(key)) {
-            event.preventDefault();
-            return false;
-        }
-        break;
+
+
+      var regex = new RegExp("^[a-zA-Z0-9.,/ $@]+$");
+      var key = event.key;
+      if (!regex.test(key)) {
+         // event.preventDefault();
+          return false;
+      }
+      else if (event.keyCode === 13) {
+        $("#search-button").click();
+      }
+      break;
   }
 });
 //Prevent pasting  of special characters into search input
 $('#search-input').on({
   keydown: function(e) {
-      if (e.which === 32 || e.which === 220) {
-          e.preventDefault();
+      if (e.which === 220) {
+          //e.preventDefault();
           var v = this.value,
               s = this.selectionStart;
           this.value = v.substr(0, s) + '' + v.substr(s, v.length);
@@ -50,8 +55,11 @@ $('#search-input').on({
   }, 
   paste: function(e) {
       var stopPaste = function(){
-         this.value = this.value.replace(/[|&()\s]/g, '');
-      };            
+
+         this.value = this.value.replace(/[|&()]/g, '');
+      };
+                      
+
       setTimeout(stopPaste.bind(this), 1);
   }
 });

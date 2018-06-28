@@ -7,7 +7,8 @@ const config = {
 firebase.initializeApp(config);
 const searchBtn = $('#search-button');
 const searchInput = $('#search-input');
-const searchResults = $('#yt-search-results')
+const searchResults = $('#yt-search-results');
+const ytPlayer = $('#yt-player');
 searchResults.hide();
 
 //Restrict search-input from having special characters
@@ -20,8 +21,10 @@ $('#search-input').bind('keydown', function (event) {
       case 38: // Up
       case 39: // Right
       case 40: // Down
-      break;
+        break;
       default:
+
+
       var regex = new RegExp("^[a-zA-Z0-9.,/ $@]+$");
       var key = event.key;
       if (!regex.test(key)) {
@@ -49,13 +52,14 @@ $('#search-input').on({
               s = this.selectionStart;
           this.value = v.substr(0, s) + '7' + v.substr(s, v.length);
       }
-  },
-  
+  }, 
   paste: function(e) {
       var stopPaste = function(){
+
          this.value = this.value.replace(/[|&()]/g, '');
       };
                       
+
       setTimeout(stopPaste.bind(this), 1);
   }
 });
@@ -76,7 +80,7 @@ function displayResults(results) {
     for (let item of results) {
       let {channelId, channelTitle, description, publishedAt, thumbnails, title} = item.snippet;
       //item.id {kind, videoId}, item.kind, item.snippet {^}
-      resultItemDiv = $('<div>').attr({id: item.id.videoId,style: 'float: left;'}).addClass('youtube-search-result')
+      resultItemDiv = $('<div>').attr({'data-id': item.id.videoId, style: 'float: left;'}).addClass('youtube-search-result')
       let thumbnail = $('<img>').attr({src: thumbnails.default.url, width: thumbnails.default.width, height: thumbnails.default.height})
       let detailsDiv = $('<div>').attr({}).addClass('youtube-search-result-details')
         .append($('<h6>').addClass('text-truncate result-title').attr({}).text(title)) //would like to find out how to truncate this text
@@ -90,5 +94,8 @@ function displayResults(results) {
     searchResults.show();
   }
 };
-
-searchBtn.on('click', searchYt)
+$(document).on('click','.youtube-search-result', function(e) {
+  let VIDEO_ID = $(this).attr('data-id');
+  ytPlayer.attr({src: `https://www.youtube.com/embed/${VIDEO_ID}`})
+})
+searchBtn.on('click', searchYt);

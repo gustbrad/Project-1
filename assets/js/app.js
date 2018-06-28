@@ -86,8 +86,8 @@ function displayResults(results) {
     searchResults.show();
   }
 };
-$(document).on('click','.youtube-search-result', (e) => {
-  console.log($(this))
-  ytPlayer.attr({src: ``})
+$(document).on('click','.youtube-search-result', function(e) {
+  let VIDEO_ID = $(this).attr('data-id');
+  ytPlayer.attr({src: `https://www.youtube.com/embed/${VIDEO_ID}`})
 })
 searchBtn.on('click', searchYt);

@@ -82,6 +82,13 @@ body {
   float: left;
 }
 
+#yt-player {
+  width: 50%;
+  height: 50%;
+}
+#search {
+  float: right;
+}
 
 /** Helper Classes */
 .text-truncate {

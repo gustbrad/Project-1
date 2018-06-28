@@ -1,8 +1,29 @@
 const API_KEY = `AIzaSyAowmVgFQkCDODU9HZ9SFVmeQlniBW_zfU`;
 
-function searchYoutube() {
-    $.ajax({'url': `https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.search.list?part=snippet&order=viewCount&q=skateboarding+dog&type=video&videoDefinition=high&key=${API_KEY}`, 'method': 'GET'})
-        .then(res => console.log(res))
-        .catch(err => console.log(err))
+function searchYoutube(query, page) {
+    let ytSearch = 'https://www.googleapis.com/youtube/v3/search?';
+    let pageToken = page || '';
+    let q = query || 'cat';
+    let params = {
+        q,
+        pageToken,
+        part: 'snippet', //add more as a single string space seperated
+        order: 'viewCount',
+        type: 'video',
+        videoDefinition: 'high',
+        videoEmbeddable: 'true',
+        //videoCategoryId: could use this to somehow restrict it to be only music
+        key: API_KEY,
+        _t: Date.now()
+    }
+    let url = ytSearch + $.param(params);
+    console.log(url)
+
+    let options = {
+        url,
+        method: 'GET',
+        headers: { 'Access-Control-Allow-Origin': '*' }
+    }
+
+    return $.ajax(options).then(res => displayResults(res))
 };
-searchYoutube();

@@ -29,7 +29,7 @@ function initClient() {
 		updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
 		authorizeButton.on('click', handleAuthClick);
 		signoutButton.on('click', handleSignoutClick);
-	});
+	}).catch(err => console.error(err));
 }
 
 /**
@@ -67,6 +67,7 @@ function getPlaylistItems() {
 		console.log(res)
 	}).catch(err => console.error(err.details));
 }
+
 function getPlaylists() {
 	gapi.client.youtube.playlists.list({
 		'part': 'snippet, contentDetails',

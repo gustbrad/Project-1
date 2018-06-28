@@ -66,22 +66,27 @@
             </nav>
         </div>
            <!-- Wide card with share menu button -->
-        
-        <div id="search" class="demo-card-wide mdl-card mdl-shadow--2dp float-right">
-            <div class="mdl-card__title">
-            <h2 class="mdl-card__title-text">Results</h2>
+        <div class="mdl-grid">
+          
+            <div class="mdl-card__media">
+                    <iframe id="yt-player" src="" frameborder="0" class=""></iframe>
             </div>
-            <div class="mdl-card__actions mdl-card--border">
-                <div id="yt-search-results"></div>
-
-                <!-- should put these buttons in a div thats positioned at the bottom of the card -->
-                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect float-left">Prev</a>
-                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect float-right">Next</a>
-                <div class="clearfix"></div>
             </div>
+            <div class="mdl-grid">
+            <div class="mdl-card">
+                    <div class="mdl-card__title">
+                       <h2 class="mdl-card__title-text mdl-card--border">Results</h2>
+                    </div>
+                    <div class="mdl-card__actions">
+                            <div id="yt-search-results"></div>
+                            <!-- should put these buttons in a div thats positioned at the bottom of the card -->
+                            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect float-left">Prev</a>
+                            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect float-right">Next</a>
+                            <div class="clearfix"></div>
+                    </div>
+                </div>
         </div>
-        <iframe id="yt-player" src="" frameborder="0" class=""></iframe>
-        
+      
 
 
     </div>

@@ -8,10 +8,10 @@
   color: white;
 }
 
-.body {
-  padding: 20px;
+
+.mdl-card__media {
   background: #fafafa;
-  position: relative;
+ 
 }
 
 .mdl-textfield__label {
@@ -26,9 +26,9 @@ color: white;
   left: 20px;
   width: 512px;
 }
-.demo-card-wide > .mdl-card__title {
+.mdl-card__title-text, .mdl-card__title {
   color: #fff;
-  height: 60px;
+
   background-color: white;
 }
 .demo-card-wide > .mdl-card__menu {
@@ -40,7 +40,7 @@ body {
   position: relative;
 }
 .mdl-card__title-text {
-  color:blue;
+  color:blue; 
 }
 
 
@@ -82,7 +82,15 @@ body {
   float: left;
 }
 
-#yt-player {
+#yt-player{
+  height:100%;
+}
+
+.mdl-card{
+  float: right;
+}
+
+.mdl-card__media {
   width: 50%;
   height: 50%;
 }

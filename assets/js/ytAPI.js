@@ -17,13 +17,11 @@ function searchYoutube(query, page) {
         _t: Date.now()
     }
     let url = ytSearch + $.param(params);
-    console.log(url)
-
     let options = {
         url,
         method: 'GET',
         headers: { 'Access-Control-Allow-Origin': '*' }
     }
-
     return $.ajax(options).then(res => displayResults(res))
+        .catch(err => console.log(err));
 };

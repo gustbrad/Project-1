@@ -74,10 +74,11 @@ let usersChannel = { //Object for default user todo: need to populate this when 
 };
 
 function displayResults(results) {
-  if(results.length > 0) {
+  let { items, kind, nextPageToken, prevPageToken, pageInfo } = results;
+  if(items.length > 0) {
     searchResults.empty();
     let resultItemDiv
-    for (let item of results) {
+    for (let item of items) {
       let {channelId, channelTitle, description, publishedAt, thumbnails, title} = item.snippet;
       //item.id {kind, videoId}, item.kind, item.snippet {^}
       resultItemDiv = $('<div>').attr({'data-id': item.id.videoId, style: 'float: left;'}).addClass('youtube-search-result')
@@ -98,4 +99,8 @@ $(document).on('click','.youtube-search-result', function(e) {
   let VIDEO_ID = $(this).attr('data-id');
   ytPlayer.attr({src: `https://www.youtube.com/embed/${VIDEO_ID}`})
 })
-searchBtn.on('click', searchYt);
+searchBtn.on('click', function(e) {
+  e.preventDefault();
+  let q = searchInput.val().trim().replace(' ', '+') || 'cats';
+  searchYoutube(q)
+});

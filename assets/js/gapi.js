@@ -86,29 +86,17 @@ function getPlaylists() {
 
 	}).catch(err => console.log(err));
 }
-function searchYt(e) {
-  if(e) {
-    e.preventDefault();
-  }
-	let q = searchInput.val().trim() || 'cats';
-	gapi.client.youtube.search.list({
-		'part': 'snippet',
-		'q': q
-	}).then(res => {
-    displayResults(res.result.items);
-    searchInput.val('')
-	}).catch(err => console.log(err));
-}
 
 function getChannel() {
 	gapi.client.youtube.channels.list({
 		'part': 'snippet,contentDetails,statistics',
 		'mine': 'true'
 	}).then(res => {
+		// console.log(res)
 		let { id, kind, snippet, statistics, contentDetails } = res.result.items[0];
 		usersChannel.title = snippet.title;
 		usersChannel.id = id;
 		usersChannel.views = statistics.viewCount;
-		console.log(usersChannel)
+		// console.log(usersChannel)
 	}).catch(err => console.log(err));
 }

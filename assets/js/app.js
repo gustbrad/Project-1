@@ -109,7 +109,7 @@ function displayResults(results) {
 };
 $(document).on('click', '.youtube-search-result', function (e) {
 	let VIDEO_ID = $(this).attr('data-id');
-	ytPlayer.attr({ src: `https://www.youtube.com/embed/${VIDEO_ID}` })
+	ytPlayer.attr({ src: `https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1` })
 })
 
 searchBtn.on('click', function (e) {

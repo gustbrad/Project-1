@@ -1,8 +1,8 @@
 const config = {
-	apiKey: "AIzaSyDi0DWfWqD-EyT4HYOVURLP-5HoD4iInIQ",
-	authDomain: "playlist-30555.firebaseapp.com",
-	databaseURL: "https://playlist-30555.firebaseio.com",
-	projectId: "playlist-30555",
+	apiKey: 'AIzaSyDi0DWfWqD-EyT4HYOVURLP-5HoD4iInIQ',
+	authDomain: 'playlist-30555.firebaseapp.com',
+	databaseURL: 'https://playlist-30555.firebaseio.com',
+	projectId: 'playlist-30555',
 };
 firebase.initializeApp(config);
 
@@ -41,14 +41,14 @@ $('#search-input').bind('keydown', function (event) {
 			break;
 		default:
 
-			var regex = new RegExp("^[a-zA-Z0-9.,/ $@]+$");
+			var regex = new RegExp('^[a-zA-Z0-9.,/ $@]+$');
 			var key = event.key;
 			if (!regex.test(key)) {
 				// event.preventDefault();
 				return false;
 			}
 			else if (event.keyCode === 13) {
-				$("#search-button").click();
+				$('#search-button').click();
 			}
 			break;
 	}
@@ -127,16 +127,16 @@ searchBtnLyrics.on('click', function (e) {
 
 	// Perfoming an AJAX GET request to our queryURL
 	$.ajax({
-		type: "GET",
+		type: 'GET',
 		data: {
-			apikey: "837d23235a55ecdf0d0c33f76c0c1051",
+			apikey: '837d23235a55ecdf0d0c33f76c0c1051',
 			q_track: trackSearch,
-			f_has_lyrics: "yes",
-			format: "jsonp",
-			callback: "jsonp_callback"
+			f_has_lyrics: 'yes',
+			format: 'jsonp',
+			callback: 'jsonp_callback'
 		},
-		url: "https://api.musixmatch.com/ws/1.1/track.search",
-		dataType: "jsonp",
+		url: 'https://api.musixmatch.com/ws/1.1/track.search',
+		dataType: 'jsonp',
 		jsonpCallback: 'jsonp_callback',
 		contentType: 'application/json',
 	}).then(function (data) {
@@ -144,12 +144,13 @@ searchBtnLyrics.on('click', function (e) {
 		for (var i = 0; i < data.message.body.track_list.length; i++) {
 			console.log(data.message.body.track_list[i].track.artist_name)
 
-			var letterP = $("<p>");
-			letterP.addClass('lyrics-search-result')
-			letterP.attr("data-artist", data.message.body.track_list[i].track.artist_name);
-			letterP.attr("data-track-id", data.message.body.track_list[i].track.track_id);
-			letterP.text(data.message.body.track_list[i].track.artist_name);
-
+			var letterP = $('<p>')
+				.addClass('lyrics-search-result')
+				.attr({
+					'data-artist': data.message.body.track_list[i].track.artist_name,
+					'data-track-id': data.message.body.track_list[i].track.track_id,
+					'data-track-name': data.message.body.track_list[i].track.commontrack_vanity_id,
+				}).text(data.message.body.track_list[i].track.artist_name);
 			searchResults.append(letterP);
 		}
 
@@ -161,25 +162,30 @@ $(document).on('click', '.lyrics-search-result', function (e) {
 
 	console.log($(this).attr('data-artist'));
 	console.log($(this).attr('data-track-id'));
-	trackId = $(this).attr('data-track-id')
+	let songName = $(this).attr('data-track-name');
+	trackId = $(this).attr('data-track-id');
+	let pT = ''; 
 
 	$.ajax({
-		type: "GET",
+		type: 'GET',
 		data: {
-			apikey: "837d23235a55ecdf0d0c33f76c0c1051",
+			apikey: '837d23235a55ecdf0d0c33f76c0c1051',
 			track_id: trackId,
-			format: "jsonp",
-			callback: "jsonp_callback"
+			format: 'jsonp',
+			callback: 'jsonp_callback'
 		},
-		url: "https://api.musixmatch.com/ws/1.1/track.lyrics.get",
-		dataType: "jsonp",
+		url: 'https://api.musixmatch.com/ws/1.1/track.lyrics.get',
+		dataType: 'jsonp',
 		jsonpCallback: 'jsonp_callback',
 		contentType: 'application/json',
 
 	}).then(function (data) {
 		console.log(data)
-		var letterP = $("<p>");
+		var letterP = $('<p>');
 		letterP.text(data.message.body.lyrics.lyrics_body);
 		searchResultsLyrics.append(letterP);
+		searchYoutube(songName, pT);
 	});
+	searchResults.hide();
+
 });

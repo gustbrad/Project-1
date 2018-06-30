@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
     <!-- Custom Styles -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <title>Document</title>
 </head>
 
@@ -35,7 +35,7 @@
         <header class="mdl-layout__header mdl-layout__header--transparent">
             <div class="mdl-layout__header-row">
                 <!-- Title -->
-                <span class="mdl-layout-title">&lt;MEH/></span>
+                <a href="../../index.html"><span class="mdl-layout-title">&lt;MEH/></span></a>
                 <!-- Add spacer, to align navigation to the right -->
                 <div class="mdl-layout-spacer"></div>
                 <!-- Navigation -->
@@ -68,64 +68,22 @@
         <div class="mdl-layout__drawer">
             <span class="mdl-layout-title">Title</span>
             <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" href="assets/htdocs/playlists.html">Saved Mehzic</a>
+            <a class="mdl-navigation__link" href="#">Saved Mehzic</a>
             <a class="mdl-navigation__link" href="">Link</a>
             <a class="mdl-navigation__link" href="">Link</a>
             <a class="mdl-navigation__link" href="">Link</a>
             </nav>
         </div>
-           
 
-        <div class="mdl-grid">
-            <div class="mdl-cell mdl-cell--4-col">
-                <div class="mdl-card">
-                    <div class="mdl-card__title">
-                        <h2 class="mdl-card__title-text mdl-card--border">Lyrics</h2>
-                    </div>
-                    <div class="mdl-card__media">
-                        <div id="search-results-lyrics"></div>
-                    </div>
-                </div>
+        <div>
+            <h3 >Saved Mehzic</h3>
+            <hr>
+            <div id="saved-music">
+
             </div>
-            <div class="mdl-layout-spacer"></div>
-            <div class="mdl-cell mdl-cell--4-col">
-                <div class="mdl-card1">
-                <div class="mdl-card__media1">
-                    <iframe id="yt-player" src="" frameborder="0" class=""></iframe>
-                </div>
-            </div>
-            </div>
-            <div class="mdl-layout-spacer"></div>
-            <div class="mdl-cell mdl-cell--4-col">
-                <div class="mdl-card">
-                <div class="mdl-card__title">
-                    <h2 class="mdl-card__title-text mdl-card--border">Results</h2>
-                </div>
-                <div class="mdl-card__media">
-                    <div id="yt-search-results"></div>
-                </div>
-                <div class="mdl-card__actions">
-                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect float-left"><</a>
-                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect float-right">></a>
-                    <div class="clearfix"></div>
-                </div>
-                </div>
-            </div>
+
         </div>
-      
-
-                
-              
-                
-    
-
-
     </div>
-    <script src="assets/js/app.js" defer></script>
-    <script src="assets/js/gapi.js"></script><!--Cannot be 'defer'-->
-    <script src="assets/js/ytAPI.js"></script><!--Cannot be 'defer'-->
-    <!-- Google Api for client and auth 2 -->
-    <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
-
+    <script src="../js/app.js" defer></script>
 </body>
 </html>

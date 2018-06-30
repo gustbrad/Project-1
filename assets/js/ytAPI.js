@@ -12,7 +12,7 @@ function searchYoutube(query, page) {
         type: 'video',
         videoDefinition: 'high',
         videoEmbeddable: 'true',
-        //videoCategoryId: could use this to somehow restrict it to be only music
+        videoCategoryId: 10,
         key: API_KEY,
         _t: Date.now()
     }

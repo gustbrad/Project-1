@@ -8,49 +8,18 @@
   color: white;
 }
 
-
-.mdl-card__media {
-  background: #fafafa;
- 
-}
-
-.mdl-textfield__label {
-color: white;
-}
-
-#sample3 {
-    color:white;
-}
-
-.demo-card-wide.mdl-card {
-  left: 20px;
-  width: 512px;
-}
-.mdl-card__title-text, .mdl-card__title {
-  color: #fff;
-
-  background-color: white;
-}
-.demo-card-wide > .mdl-card__menu {
-  color: #fff;
-}
-
 body {
   background: #fafafa;
-  position: relative;
-}
-.mdl-card__title-text {
-  color:blue; 
-}
 
+}
 
 /** Classes for displaying youtube search results */
 #yt-search-results {
   padding: .2em;
-  width: 500px;
+  width: auto;
   overflow: auto;
   height: 400px; /** I shouldnt hard-code this, just testing overflow scroll */
-  background: lightgray;
+  background-color: transparent;
   
 }
 .youtube-search-result {
@@ -86,14 +55,46 @@ body {
   height:100%;
 }
 
-.mdl-card{
-  float: right;
+  /**Divs For Results Lyrics and Player**/
+.mdl-textfield__label {
+  color: white;
+  }
+
+/**Text For Results Card**/
+.mdl-card__title-text {
+  color:blue; 
 }
 
-.mdl-card__media {
-  width: 50%;
-  height: 50%;
+/**Style for reults card**/
+.mdl-card__title-text, .mdl-card__title {
+  background-color: white;
 }
+
+/**Style for player card**/
+.mdl-card1{
+  background-color: gray;
+  height: auto;
+  width: auto;
+}
+
+/**Style for lyrics card**/
+.mdl-card2{
+  background-color: gray;
+}
+
+/**Style for reults card**/
+.mdl-card__media {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+}
+/**Style for reults card**/
+.mdl-card__media1 {
+  width: auto;
+  height: auto;
+  background-color: transparent;
+}
+
 #search {
   float: right;
 }

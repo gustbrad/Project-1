@@ -13,10 +13,22 @@ body {
 
 }
 
-.add-playlist{
+.mdl-button.mdl-js-button.mdl-button--fab.mdl-js-ripple-effect.mdl-button--colored.add-playlist{
+  background-color: blue;
   position: absolute;
   bottom: 1rem;
   right: 1rem;
+}
+
+.mdl-button.mdl-js-button.mdl-button--fab.mdl-js-ripple-effect.mdl-button--colored.min-playlist{
+  background-color: blue;
+  position: absolute;
+  bottom: 1rem;
+  right: 5rem;
+}
+
+#demo-menu-top-right {
+  margin-top: 250px;
 }
 
 /** Classes for displaying youtube search results */

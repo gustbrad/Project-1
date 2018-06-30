@@ -21,6 +21,9 @@ const searchInput = $('#search-input');
 const searchResults = $('#yt-search-results');
 const ytPlayer = $('#yt-player');
 searchResults.hide();
+$(".mdl-card").hide(); // Hides the results card at the beginning
+$(".mdl-card1").hide(); // Hides the video player card at the beginning
+$(".mdl-card-lyrics").hide(); // Hides the lyrics card at the beginning
 
 playlistsRef.child('1').child('playlist1').on('value', snap => { // For Playlist Page
 	let playlist = snap.val();
@@ -117,6 +120,8 @@ function displayResults(results) {
 $(document).on('click', '.youtube-search-result', function (e) {
 	let VIDEO_ID = $(this).attr('data-id');
 	ytPlayer.attr({ src: `https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1` })
+	$(".mdl-card").hide(); // hides the reults list
+	$(".mdl-card1").show(); // shows the results card after search is entered
 })
 
 searchBtn.on('click', function (e) {
@@ -129,9 +134,12 @@ searchBtn.on('click', function (e) {
 	e.preventDefault();
 	var trackSearch = searchInput.val().trim()
 	console.log(trackSearch)
+	searchResults.empty();
+	$(".mdl-card1").hide(); // Hides the video player card 
+	$(".mdl-card-lyrics").hide(); // Hides the lyrics card 
+	$(".mdl-card").show(); // shows the results card after search is entered
 
-	// Perfoming an AJAX GET request to our queryURL
-	$.ajax({
+	$.ajax({ 	// Perfoming an AJAX GET request to our queryURL
 		type: 'GET',
 		data: {
 			apikey: '837d23235a55ecdf0d0c33f76c0c1051',
@@ -164,7 +172,7 @@ searchBtn.on('click', function (e) {
 	
 });
 $(document).on('click', '.lyrics-search-result', function (e) {
-
+	$(".mdl-card-lyrics").show(); // shows the results card after search is entered
 	console.log($(this).attr('data-artist'));
 	console.log($(this).attr('data-track-id'));
 	let songName = $(this).attr('data-track-name');
@@ -194,3 +202,12 @@ $(document).on('click', '.lyrics-search-result', function (e) {
 	searchResults.hide();
 
 });
+
+$(document).on('click', '.hide', function (e) {
+	$(".mdl-card").hide();
+});
+
+$(document).on('click', '.show', function (e) {
+	$(".mdl-card").show();
+});
+

@@ -127,13 +127,14 @@ searchBtnLyrics.on('click', function(e) {
   e.preventDefault();
       var trackSearch = searchInputLyrics.val().trim()
       console.log(trackSearch)
-     // var trackSearch = "life in the fast lane"
+  
       // Perfoming an AJAX GET request to our queryURL
       $.ajax({
         type: "GET",
         data: {
             apikey:"837d23235a55ecdf0d0c33f76c0c1051",
             q_track: trackSearch,
+            f_has_lyrics: "yes",
             format:"jsonp",
             callback:"jsonp_callback"
         },
@@ -142,12 +143,59 @@ searchBtnLyrics.on('click', function(e) {
         jsonpCallback: 'jsonp_callback',
         contentType: 'application/json',
       })
+      
       .then(function(data) {
         console.log(data)
         for (var i = 0; i < data.message.body.track_list.length; i++) {
           console.log(data.message.body.track_list[i].track.artist_name)
+
           searchResultsLyrics.append(data.message.body.track_list[i].track.artist_name);  
         }
+
+          var letterP = $("<p>");
+          letterP.addClass('lyrics-search-result')
+          //letterP.attr(data.message.body.track_list[i].track.artist_name);
+          //letterP.attr(data.message.body.track_list[i].track.lyrics_id);
+          //console.log(letterP);
+          letterP.attr("data-artist", data.message.body.track_list[i].track.artist_name);
+          letterP.attr("data-track-id", data.message.body.track_list[i].track.track_id);
+          letterP.text(data.message.body.track_list[i].track.artist_name);
+        
+          searchResults.append(letterP); 
+        } 
+    
+      searchResults.show();
+  
+      $(document).on('click','.lyrics-search-result', function(e) {
+      
+        console.log($(this).attr('data-artist'));
+        console.log($(this).attr('data-track-id'));
+trackId = $(this).attr('data-track-id')
+              // Perfoming an AJAX GET request to our queryURL
+
+             
+      $.ajax({
+        type: "GET",
+        data: {
+            apikey:"837d23235a55ecdf0d0c33f76c0c1051",
+            track_id: trackId,
+            format:"jsonp",
+            callback:"jsonp_callback"
+        },
+        url: "https://api.musixmatch.com/ws/1.1/track.lyrics.get",
+        dataType: "jsonp",
+        jsonpCallback: 'jsonp_callback',
+        contentType: 'application/json',
+
       })
+      .then(function(data) {
+        console.log(data)
+        var letterP = $("<p>");
+        letterP.text(data.message.body.lyrics.lyrics_body);
+        searchResultsLyrics.append(letterP); 
+      });
+      });
+  
+    })
 
 });

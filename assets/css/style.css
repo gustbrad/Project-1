@@ -20,6 +20,7 @@ body {
   overflow: auto;
   height: 400px; /** I shouldnt hard-code this, just testing overflow scroll */
   background-color: transparent;
+  color: black;
   
 }
 .youtube-search-result {
@@ -80,6 +81,10 @@ body {
 /**Style for lyrics card**/
 .mdl-card2{
   background-color: gray;
+}
+.mdl-card-lyrics{
+  background-color: white;
+  overflow: auto;
 }
 
 /**Style for reults card**/

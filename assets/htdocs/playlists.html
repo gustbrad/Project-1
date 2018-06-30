@@ -39,30 +39,21 @@
                 <!-- Add spacer, to align navigation to the right -->
                 <div class="mdl-layout-spacer"></div>
                 <!-- Navigation -->
-                <nav class="mdl-navigation">
+                 <nav class="mdl-navigation">
+                        <!-- Sign in / Out buttons -can be placed anywhere, one is usually hidden at all times- --> 
+                        <!--Add buttons to initiate auth sequence and sign out-->
                         <form action="#">
-                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    <input class="mdl-textfield__input" type="text" id="search-input-lyrics">
-                                    <label class="mdl-textfield__label" for="search-input-lyrics">Search...</label>
-                                </div>    
-                                <button class="mdl-button mdl-js-button mdl-button--icon">
-                                    <i class="material-icons" id="search-button-lyrics">search lyrics </i>
-                                </button>   
-                            </form>
-                    <!-- Sign in / Out buttons -can be placed anywhere, one is usually hidden at all times- --> 
-                    <!--Add buttons to initiate auth sequence and sign out-->
-                    <form action="#">
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <input class="mdl-textfield__input" type="text" id="search-input">
-                            <label class="mdl-textfield__label" for="search-input">Search...</label>
-                        </div>    
-                        <button class="mdl-button mdl-js-button mdl-button--icon">
-                            <i class="material-icons" id="search-button">search</i>
-                        </button>   
-                    </form>
-                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="authorize-button">Login</button>
-                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="signout-button">Sign Out</button>
-                </nav>
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="text" id="search-input">
+                                <label class="mdl-textfield__label" for="search-input">Search for a song...</label>
+                            </div>    
+                            <button class="mdl-button mdl-js-button mdl-button--icon">
+                                <i class="material-icons" id="search-button">search</i>
+                            </button>   
+                        </form>
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="authorize-button">Login</button>
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="signout-button">Sign Out</button>
+                    </nav>
             </div>
         </header>
         <div class="mdl-layout__drawer">
@@ -84,6 +75,22 @@
 
         </div>
     </div>
+            <!-- Right aligned menu on top of button  -->
+            <button id="menu-top-right"
+            class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored min-playlist">
+            <i class="material-icons">more_vert</i>
+        </button>
+        <ul class="mdl-menu mdl-menu--top-right mdl-js-menu mdl-js-ripple-effect"
+            data-mdl-for="menu-top-right">
+                <li class="mdl-menu__item add">Add to Playlist</li>
+                <li class="mdl-menu__item hide">Hide Results</li>
+                <li class="mdl-menu__item show">Show Results</li>
+                <li class="mdl-menu__item home"><a class="mdl-navigation__link" href="../../index.html">Home</a></li>
+        </ul>                                                                       
+        <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored add-playlist">
+                <i class="material-icons">playlist_add</i>
+        </button>
+      </div>
     <script src="../js/app.js" defer></script>
 </body>
 </html>

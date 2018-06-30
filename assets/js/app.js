@@ -148,21 +148,15 @@ searchBtnLyrics.on('click', function(e) {
         console.log(data)
         for (var i = 0; i < data.message.body.track_list.length; i++) {
           console.log(data.message.body.track_list[i].track.artist_name)
-
-          searchResultsLyrics.append(data.message.body.track_list[i].track.artist_name);  
-        }
-
+		
           var letterP = $("<p>");
           letterP.addClass('lyrics-search-result')
-          //letterP.attr(data.message.body.track_list[i].track.artist_name);
-          //letterP.attr(data.message.body.track_list[i].track.lyrics_id);
-          //console.log(letterP);
           letterP.attr("data-artist", data.message.body.track_list[i].track.artist_name);
           letterP.attr("data-track-id", data.message.body.track_list[i].track.track_id);
           letterP.text(data.message.body.track_list[i].track.artist_name);
         
           searchResults.append(letterP); 
-        } 
+        }
     
       searchResults.show();
   
@@ -170,8 +164,8 @@ searchBtnLyrics.on('click', function(e) {
       
         console.log($(this).attr('data-artist'));
         console.log($(this).attr('data-track-id'));
-trackId = $(this).attr('data-track-id')
-              // Perfoming an AJAX GET request to our queryURL
+		trackId = $(this).attr('data-track-id')
+             
 
              
       $.ajax({

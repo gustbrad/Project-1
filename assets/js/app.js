@@ -5,6 +5,21 @@ const config = {
     projectId: "playlist-30555",
 };
 firebase.initializeApp(config);
+
+const playlistsRef = firebase.database().ref('playlists');
+
+playlistsRef.child('1').child('playlist1').on('value', snap => {
+  let playlist = snap.val();
+  let playlistDiv = $('#saved-music').empty();
+
+  for (const song in playlist) {
+    const {videoId, lyricId, songName } = playlist[song]
+    playlistDiv.append($('<a>').attr({id: song, href: '../../index.html'}).text(songName))
+    // console.log(songName)
+  }
+});
+
+
 const searchBtnLyrics = $('#search-button-lyrics');
 const searchInputLyrics = $('#search-input-lyrics');
 const searchResultsLyrics = $('#search-results-lyrics');
@@ -133,6 +148,10 @@ searchBtnLyrics.on('click', function(e) {
         console.log(data)
         for (var i = 0; i < data.message.body.track_list.length; i++) {
           console.log(data.message.body.track_list[i].track.artist_name)
+
+          searchResultsLyrics.append(data.message.body.track_list[i].track.artist_name);  
+        }
+
           var letterP = $("<p>");
           letterP.addClass('lyrics-search-result')
           //letterP.attr(data.message.body.track_list[i].track.artist_name);
@@ -167,6 +186,7 @@ trackId = $(this).attr('data-track-id')
         dataType: "jsonp",
         jsonpCallback: 'jsonp_callback',
         contentType: 'application/json',
+
       })
       .then(function(data) {
         console.log(data)

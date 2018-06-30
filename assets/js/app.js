@@ -5,6 +5,9 @@ const config = {
     projectId: "playlist-30555",
 };
 firebase.initializeApp(config);
+const searchBtnLyrics = $('#search-button-lyrics');
+const searchInputLyrics = $('#search-input-lyrics');
+const searchResultsLyrics = $('#search-results-lyrics');
 const searchBtn = $('#search-button');
 const searchInput = $('#search-input');
 const searchResults = $('#yt-search-results');
@@ -103,4 +106,33 @@ searchBtn.on('click', function(e) {
   e.preventDefault();
   let q = searchInput.val().trim().replace(' ', '+') || 'cats';
   searchYoutube(q)
+});
+
+searchBtnLyrics.on('click', function(e) {
+  e.preventDefault();
+      var trackSearch = searchInputLyrics.val().trim()
+      console.log(trackSearch)
+     // var trackSearch = "life in the fast lane"
+      // Perfoming an AJAX GET request to our queryURL
+      $.ajax({
+        type: "GET",
+        data: {
+            apikey:"837d23235a55ecdf0d0c33f76c0c1051",
+            q_track: trackSearch,
+            format:"jsonp",
+            callback:"jsonp_callback"
+        },
+        url: "https://api.musixmatch.com/ws/1.1/track.search",
+        dataType: "jsonp",
+        jsonpCallback: 'jsonp_callback',
+        contentType: 'application/json',
+      })
+      .then(function(data) {
+    console.log(data)
+    for (var i = 0; i < data.message.body.track_list.length; i++) {
+      console.log(data.message.body.track_list[i].track.artist_name)
+      searchResultsLyrics.append(data.message.body.track_list[i].track.artist_name);  
+    }
+      })
+
 });

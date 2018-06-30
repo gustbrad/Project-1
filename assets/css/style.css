@@ -13,6 +13,12 @@ body {
 
 }
 
+.add-playlist{
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+}
+
 /** Classes for displaying youtube search results */
 #yt-search-results {
   padding: .2em;

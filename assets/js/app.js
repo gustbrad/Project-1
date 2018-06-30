@@ -7,6 +7,7 @@ const config = {
 firebase.initializeApp(config);
 
 const playlistsRef = firebase.database().ref('playlists');
+
 let usersChannel = { //Object for default user todo: need to populate this when we log the user in
 	id: null,
 	title: 'Guest',
@@ -14,8 +15,6 @@ let usersChannel = { //Object for default user todo: need to populate this when 
 	playlists: []
 };
 
-const searchBtnLyrics = $('#search-button-lyrics');
-const searchInputLyrics = $('#search-input-lyrics');
 const searchResultsLyrics = $('#search-results-lyrics');
 const searchBtn = $('#search-button');
 const searchInput = $('#search-input');
@@ -119,15 +118,16 @@ $(document).on('click', '.youtube-search-result', function (e) {
 	let VIDEO_ID = $(this).attr('data-id');
 	ytPlayer.attr({ src: `https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1` })
 })
+
 searchBtn.on('click', function (e) {
 	e.preventDefault();
 	let q = searchInput.val().trim().replace(' ', '+') || 'cats';
-	searchYoutube(q)
+	//searchYoutube(q)
 });
 
-searchBtnLyrics.on('click', function (e) {
+searchBtn.on('click', function (e) {
 	e.preventDefault();
-	var trackSearch = searchInputLyrics.val().trim()
+	var trackSearch = searchInput.val().trim()
 	console.log(trackSearch)
 
 	// Perfoming an AJAX GET request to our queryURL

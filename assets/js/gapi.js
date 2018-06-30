@@ -80,10 +80,9 @@ function getPlaylists() {
 				usersChannel.playlists.push(playlist.id);
 			}
 		}
-		console.log(usersChannel);
 		// getPlaylistItems();
 		let { id, kind, snippet, statistics, contentDetails } = res.result.items[0];
-
+		
 	}).catch(err => console.log(err));
 }
 
@@ -97,6 +96,7 @@ function getChannel() {
 		usersChannel.title = snippet.title;
 		usersChannel.id = id;
 		usersChannel.views = statistics.viewCount;
+		greet(usersChannel.title);
 		// console.log(usersChannel)
 	}).catch(err => console.log(err));
 }

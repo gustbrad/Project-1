@@ -7,6 +7,14 @@ const config = {
 firebase.initializeApp(config);
 
 const playlistsRef = firebase.database().ref('playlists');
+
+let usersChannel = { //Object for default user todo: need to populate this when we log the user in
+	id: null,
+	title: 'Guest',
+	views: null,
+	playlists: []
+};
+
 const searchResultsLyrics = $('#search-results-lyrics');
 const searchBtn = $('#search-button');
 const searchInput = $('#search-input');
@@ -24,6 +32,11 @@ playlistsRef.child('1').child('playlist1').on('value', snap => { // For Playlist
 		// console.log(songName)
 	}
 });
+function greet(n) {
+	name = n || 'Guest';
+	$('#name').text(name)
+}
+greet();
 
 //Restrict search-input from having special characters
 $('#search-input').bind('keydown', function (event) {
@@ -78,12 +91,6 @@ $('#search-input').on({
 
 
 
-let usersChannel = { //Object for default user todo: need to populate this when we log the user in
-	id: null,
-	title: 'Guest',
-	views: null,
-	playlists: []
-};
 
 function displayResults(results) {
 	let { items, kind, nextPageToken, prevPageToken, pageInfo } = results;

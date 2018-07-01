@@ -253,17 +253,21 @@ $(document).on('click', '.play-add', function (e) { // button to add song to pla
 
 });
 
+
+
 $(document).on('click', '.toggle1', function (e) { // button to add toggle bewteen searching by song or artist
 	var state1 = $(this).attr('class')
 	if (state1.includes("is-checked")){
 		var t1 = document.getElementById("search-input");
 		t1.parentElement.MaterialTextfield.change("Search for an Artist");
+		$('.mdl-textfield__label, .mdl-textfield_input, .crazy').css("color", "rgb(235, 22, 146)");
 		state2 = "artist";
 	}
 	else {
 		var t1 = document.getElementById("search-input");
 		t1.parentElement.MaterialTextfield.change("Search for a Song");
 		state2 = "song";
+		$('.mdl-textfield__label, .mdl-textfield_input, .crazy').css("color", "blue");
 	}
 });
 

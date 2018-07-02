@@ -54,6 +54,12 @@ function handleAuthClick(event) {
 
 function handleSignoutClick(event) {
 	gapi.auth2.getAuthInstance().signOut();
+	usersChannel = {
+		id: null,
+		title: 'Guest',
+		views: null,
+		playlists: []
+	};
 }
 
 

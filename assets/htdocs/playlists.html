@@ -39,18 +39,28 @@
                 <!-- Add spacer, to align navigation to the right -->
                 <div class="mdl-layout-spacer"></div>
                 <!-- Navigation -->
-                    <nav class="mdl-navigation">
-                        <!-- Sign in / Out buttons -can be placed anywhere, one is usually hidden at all times- --> 
-                        <!--Add buttons to initiate auth sequence and sign out-->
+                <nav class="mdl-navigation">
+                        <!--Toggle switch to change search by song or artist-->
+                        <div class = "toggle-label-artist">Artist</div>
+                        <div>
+                        <label class="mdl-switch mdl-js-switch toggle1" for="switch-1">
+                            <input type="checkbox" id="switch-1" class="mdl-switch__input" checked>
+                            <span class="mdl-switch__label"></span>
+                        </label>
+                        </div> 
+                        <div class = "toggle-label-song">Song</div>
+                        <!--Search input field by song or artist-->
                         <form action="#">
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <input class="mdl-textfield__input" type="text" id="search-input">
-                                <label class="mdl-textfield__label" for="search-input">Search for a song...</label>
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield crazy">
+                                <input class="mdl-textfield__input crazy" type="text" id="search-input">
+                                <label class="mdl-textfield__label crazy1" for="search-input">Search for a Song...</label>
                             </div>    
                             <button class="mdl-button mdl-js-button mdl-button--icon">
                                 <i class="material-icons" id="search-button">search</i>
                             </button>   
                         </form>
+                        <!-- Sign in / Out buttons -can be placed anywhere, one is usually hidden at all times- --> 
+                        <!--Add buttons to initiate auth sequence and sign out-->
                         <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="authorize-button">Login</button>
                         <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="signout-button">Sign Out</button>
                     </nav>

@@ -15,6 +15,8 @@ let usersChannel = { //Object for default user todo: need to populate this when 
 	playlists: []
 };
 
+
+let state2 = "song"
 const searchResultsLyrics = $('#search-results-lyrics');
 const searchBtn = $('#search-button');
 const searchInput = $('#search-input');
@@ -122,6 +124,7 @@ $(document).on('click', '.youtube-search-result', function (e) {
 	ytPlayer.attr({ src: `https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1` })
 	$(".mdl-card").hide(); // hides the reults list
 	$(".mdl-card1").show(); // shows the results card after search is entered
+	$(".mdl-card-lyrics").show(); // shows the results card after search is entered
 })
 
 searchBtn.on('click', function (e) {
@@ -133,46 +136,79 @@ searchBtn.on('click', function (e) {
 searchBtn.on('click', function (e) {
 	e.preventDefault();
 	var trackSearch = searchInput.val().trim()
+	var artistSearch = searchInput.val().trim()
 	console.log(trackSearch)
+	console.log(state2)
 	searchResults.empty();
 	$(".mdl-card1").hide(); // Hides the video player card 
 	$(".mdl-card-lyrics").hide(); // Hides the lyrics card 
+	console.log(state2)
+	if(state2 === "song"){
+		$.ajax({ 	// Perfoming an AJAX GET request to our queryURL
+			type: 'GET',
+			data: {
+				apikey: '837d23235a55ecdf0d0c33f76c0c1051',
+				q_track: trackSearch,
+				f_has_lyrics: 'yes',
+				format: 'jsonp',
+				callback: 'jsonp_callback'
+			},
+			url: 'https://api.musixmatch.com/ws/1.1/track.search',
+			dataType: 'jsonp',
+			jsonpCallback: 'jsonp_callback',
+			contentType: 'application/json',
+		}).then(function (data) {
+			console.log(data)
+			
+			for (var i = 0; i < data.message.body.track_list.length; i++) {
+				console.log(data.message.body.track_list[i].track.artist_name)
+				var letterP = $('<p>')
+					.addClass('lyrics-search-result')
+					.attr({
+						'data-artist': data.message.body.track_list[i].track.artist_name,
+						'data-track-id': data.message.body.track_list[i].track.track_id,
+						'data-track-name': data.message.body.track_list[i].track.commontrack_vanity_id,
+					}).text(data.message.body.track_list[i].track.artist_name);
+				searchResults.append(letterP);
+			}
+			searchResults.show();
+		});
+	}
+	else if(state2 === "artist"){
+		$.ajax({ 	// Perfoming an AJAX GET request to our queryURL
+			type: 'GET',
+			data: {
+				apikey: '837d23235a55ecdf0d0c33f76c0c1051',
+				q_artist: artistSearch,
+				f_has_lyrics: 'yes',
+				format: 'jsonp',
+				callback: 'jsonp_callback'
+			},
+			url: 'https://api.musixmatch.com/ws/1.1/track.search',
+			dataType: 'jsonp',
+			jsonpCallback: 'jsonp_callback',
+			contentType: 'application/json',
+		}).then(function (data) {
+			console.log(data)
+			console.log(state2)
+			for (var i = 0; i < data.message.body.track_list.length; i++) {
+				console.log(data.message.body.track_list[i].track.track_name)
+				var letterP = $('<p>')
+					.addClass('lyrics-search-result')
+					.attr({
+						'data-artist': data.message.body.track_list[i].track.artist_name,
+						'data-track-id': data.message.body.track_list[i].track.track_id,
+						'data-track-name': data.message.body.track_list[i].track.commontrack_vanity_id,
+					}).text(data.message.body.track_list[i].track.track_name);
+				searchResults.append(letterP);
+			}
+			searchResults.show();
+		});
+	}
 	$(".mdl-card").show(); // shows the results card after search is entered
-
-	$.ajax({ 	// Perfoming an AJAX GET request to our queryURL
-		type: 'GET',
-		data: {
-			apikey: '837d23235a55ecdf0d0c33f76c0c1051',
-			q_track: trackSearch,
-			f_has_lyrics: 'yes',
-			format: 'jsonp',
-			callback: 'jsonp_callback'
-		},
-		url: 'https://api.musixmatch.com/ws/1.1/track.search',
-		dataType: 'jsonp',
-		jsonpCallback: 'jsonp_callback',
-		contentType: 'application/json',
-	}).then(function (data) {
-		console.log(data)
-		for (var i = 0; i < data.message.body.track_list.length; i++) {
-			console.log(data.message.body.track_list[i].track.artist_name)
-
-			var letterP = $('<p>')
-				.addClass('lyrics-search-result')
-				.attr({
-					'data-artist': data.message.body.track_list[i].track.artist_name,
-					'data-track-id': data.message.body.track_list[i].track.track_id,
-					'data-track-name': data.message.body.track_list[i].track.commontrack_vanity_id,
-				}).text(data.message.body.track_list[i].track.artist_name);
-			searchResults.append(letterP);
-		}
-
-		searchResults.show();
-	});
-	
 });
 $(document).on('click', '.lyrics-search-result', function (e) {
-	$(".mdl-card-lyrics").show(); // shows the results card after search is entered
+
 	console.log($(this).attr('data-artist'));
 	console.log($(this).attr('data-track-id'));
 	let songName = $(this).attr('data-track-name');
@@ -216,4 +252,21 @@ $(document).on('click', '.play-add', function (e) { // button to add song to pla
 	
 
 });
+
+$(document).on('click', '.toggle1', function (e) { // button to add toggle bewteen searching by song or artist
+	var state1 = $(this).attr('class')
+	if (state1.includes("is-checked")){
+		var t1 = document.getElementById("search-input");
+		t1.parentElement.MaterialTextfield.change("Search for an Artist");
+		state2 = "artist";
+	}
+	else {
+		var t1 = document.getElementById("search-input");
+		t1.parentElement.MaterialTextfield.change("Search for a Song");
+		state2 = "song";
+	}
+});
+
+
+
 

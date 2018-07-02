@@ -106,6 +106,20 @@ body {
   color: rgb(235, 22, 146);
 }
 
+.toggle-label-song{
+  padding-right: 15px;
+  color: blue;
+}
+
+.toggle-label-artist{
+  padding-right: 15px;
+  color: rgb(235, 22, 146);
+}
+
+.toggle1{
+  padding-right: 15px;
+  color: blue;
+}
 
 .mdl-textfield__label, .mdl-textfield_input, .crazy{
   color: blue !important;

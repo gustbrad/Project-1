@@ -34,16 +34,34 @@ $(".mdl-card").hide(); // Hides the results card at the beginning
 $(".mdl-card1").hide(); // Hides the video player card at the beginning
 $(".mdl-card-lyrics").hide(); // Hides the lyrics card at the beginning
 
-playlistsRef.child('1').child('playlist1').on('value', snap => { // For Playlist Page
-	let playlist = snap.val();
-	let playlistDiv = $('#saved-music').empty();
-
-	for (const song in playlist) {
-		const { videoId, lyricId, songName } = playlist[song]
-		playlistDiv.append($('<a>').attr({ id: song, href: '../../index.html' }).text(songName))
-		// console.log(songName)
+function getPlaylists() {
+	console.log(usersChannel)
+	if(usersChannel.id !== null) {
+		playlistsRef.child(usersChannel.id).child('1').once('value', snap => { // For Playlist Page
+			let playlist = snap.val();
+			let playlistDiv = $('#saved-music').empty();	
+			for (const song in playlist) {
+				const { artist, songId, lyricsId, songName } = playlist[song]
+				const p = $('<p>').addClass('playlist-song').attr({ 
+					id: song, href: '#', 
+					'data-lyrics-id': lyricsId, 
+					'data-song-id': songId, 
+				}).text(songName)
+				playlistDiv.append(p);
+			}
+		});
+	}else{
+		console.log('waiting')
+		setTimeout(getPlaylists, 100)
 	}
-});
+}
+getPlaylists()
+function playPlaylistItem(item) {}
+$(document).on('click', '.playlist-song', function(e) {
+
+	console.log($(this))
+})
+
 function greet(n) {
 	name = n || 'Guest';
 	$('#name').text(name)

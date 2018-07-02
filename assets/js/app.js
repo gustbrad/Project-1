@@ -15,6 +15,13 @@ let usersChannel = { //Object for default user todo: need to populate this when 
 	playlists: []
 };
 
+currentItem = {
+	songName: null,
+	artist: null,
+	songId: null,
+	lyricsId: null
+}
+
 
 let state2 = "song"
 const searchResultsLyrics = $('#search-results-lyrics');
@@ -55,7 +62,6 @@ $('#search-input').bind('keydown', function (event) {
 		case 40: // Down
 			break;
 		default:
-
 			var regex = new RegExp('^[a-zA-Z0-9.,/ $@]+$');
 			var key = event.key;
 			if (!regex.test(key)) {
@@ -95,8 +101,6 @@ $('#search-input').on({
 });
 
 
-
-
 function displayResults(results) {
 	let { items, kind, nextPageToken, prevPageToken, pageInfo } = results;
 	if (items.length > 0) {
@@ -105,7 +109,7 @@ function displayResults(results) {
 		for (let item of items) {
 			let { channelId, channelTitle, description, publishedAt, thumbnails, title } = item.snippet;
 			//item.id {kind, videoId}, item.kind, item.snippet {^}
-			resultItemDiv = $('<div>').attr({ 'data-id': item.id.videoId, style: 'float: left;' }).addClass('youtube-search-result')
+			resultItemDiv = $('<div>').attr({ 'data-id': item.id.videoId, 'data-song': title, style: 'float: left;' }).addClass('youtube-search-result')
 			let thumbnail = $('<img>').attr({ src: thumbnails.default.url, width: thumbnails.default.width, height: thumbnails.default.height })
 			let detailsDiv = $('<div>').attr({}).addClass('youtube-search-result-details')
 				.append($('<h6>').addClass('text-truncate result-title').attr({}).text(title)) //would like to find out how to truncate this text
@@ -121,6 +125,9 @@ function displayResults(results) {
 };
 $(document).on('click', '.youtube-search-result', function (e) {
 	let VIDEO_ID = $(this).attr('data-id');
+	currentItem.songName = $(this).attr('data-song');
+	currentItem.songId = VIDEO_ID;
+	console.log(currentItem)
 	ytPlayer.attr({ src: `https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1` })
 	$(".mdl-card").hide(); // hides the reults list
 	$(".mdl-card1").show(); // shows the results card after search is entered
@@ -137,12 +144,12 @@ searchBtn.on('click', function (e) {
 	e.preventDefault();
 	var trackSearch = searchInput.val().trim()
 	var artistSearch = searchInput.val().trim()
-	console.log(trackSearch)
-	console.log(state2)
+	// console.log(trackSearch)
+	// console.log(state2)
 	searchResults.empty();
 	$(".mdl-card1").hide(); // Hides the video player card 
 	$(".mdl-card-lyrics").hide(); // Hides the lyrics card 
-	console.log(state2)
+	// console.log(state2)
 	if(state2 === "song"){
 		$.ajax({ 	// Perfoming an AJAX GET request to our queryURL
 			type: 'GET',
@@ -158,10 +165,10 @@ searchBtn.on('click', function (e) {
 			jsonpCallback: 'jsonp_callback',
 			contentType: 'application/json',
 		}).then(function (data) {
-			console.log(data)
+			// console.log(data)
 			
-			for (var i = 0; i < data.message.body.track_list.length; i++) {
-				console.log(data.message.body.track_list[i].track.artist_name)
+			for (let i = 0; i < data.message.body.track_list.length; i++) {
+				// console.log(data.message.body.track_list[i].track.artist_name)
 				var letterP = $('<p>')
 					.addClass('lyrics-search-result')
 					.attr({
@@ -191,7 +198,7 @@ searchBtn.on('click', function (e) {
 		}).then(function (data) {
 			console.log(data)
 			console.log(state2)
-			for (var i = 0; i < data.message.body.track_list.length; i++) {
+			for (let i = 0; i < data.message.body.track_list.length; i++) {
 				console.log(data.message.body.track_list[i].track.track_name)
 				var letterP = $('<p>')
 					.addClass('lyrics-search-result')
@@ -209,8 +216,9 @@ searchBtn.on('click', function (e) {
 });
 $(document).on('click', '.lyrics-search-result', function (e) {
 
-	console.log($(this).attr('data-artist'));
-	console.log($(this).attr('data-track-id'));
+	currentItem.artist = $(this).attr('data-artist');
+	currentItem.lyricsId = $(this).attr('data-track-id');
+	console.log(currentItem)
 	let songName = $(this).attr('data-track-name');
 	trackId = $(this).attr('data-track-id');
 	let pT = ''; 
@@ -229,7 +237,7 @@ $(document).on('click', '.lyrics-search-result', function (e) {
 		contentType: 'application/json',
 
 	}).then(function (data) {
-		console.log(data)
+		// console.log(data)
 		var letterP = $('<p>');
 		letterP.text(data.message.body.lyrics.lyrics_body);
 		searchResultsLyrics.empty();
@@ -248,9 +256,20 @@ $(document).on('click', '.show', function (e) {
 	$(".mdl-card").show();
 });
 
-$(document).on('click', '.play-add', function (e) { // button to add song to playlist
-	
-
+$('#add-playlist').on('click', function (e) { // button to add song to playlist
+	if(usersChannel.id === null) { return console.log('Please sign in first') };
+	for (const key in currentItem) {
+		if (currentItem[key] === null) { return console.log('please pick a song first') }
+	}
+	// console.log(usersChannel, currentItem)
+	let { lyricsId, songId, songName, artist } = currentItem;
+	// console.log(lyricId)
+	playlistsRef.child(`${usersChannel.id}/1`).push().set({ // dbRef/playlists/{usersChannel.id}/1/{newKey}
+		songName,
+		artist,
+		songId,
+		lyricsId
+	}).then(data => console.log(data)).catch(err=>console.log(err))
 });
 
 

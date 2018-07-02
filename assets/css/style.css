@@ -122,12 +122,10 @@ body {
 }
 
 .mdl-textfield__label, .mdl-textfield_input, .crazy{
-  color: blue !important;
+  color: blue;
 }
 
-.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label{
-  color: blue !important;
-}
+
 
 
 .mdl-card-lyrics{

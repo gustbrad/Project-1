@@ -35,7 +35,7 @@
         <header class="mdl-layout__header mdl-layout__header--transparent">
             <div class="mdl-layout__header-row">
                 <!-- Title -->
-                <span class="mdl-layout-title">&lt;MEH/></span><span>Welcome <span id="name"></span>!</span>
+                <span class="mdl-layout-title">&lt;MEH/></span><span id="welcome">Welcome <span id="name"></span>!</span>
                 <!-- Add spacer, to align navigation to the right -->
                 <div class="mdl-layout-spacer"></div>
                 <!-- Navigation -->
@@ -43,9 +43,9 @@
                     <!-- Sign in / Out buttons -can be placed anywhere, one is usually hidden at all times- --> 
                     <!--Add buttons to initiate auth sequence and sign out-->
                     <form action="#">
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <input class="mdl-textfield__input" type="text" id="search-input">
-                            <label class="mdl-textfield__label" for="search-input">Search for a song...</label>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label crazy">
+                            <input class="mdl-textfield__input crazy" type="text" id="search-input">
+                            <label class="mdl-textfield__label crazy1" for="search-input">Search for a song...</label>
                         </div>    
                         <button class="mdl-button mdl-js-button mdl-button--icon">
                             <i class="material-icons" id="search-button">search</i>
@@ -119,7 +119,7 @@
                 <li class="mdl-menu__item playlist"><a class="mdl-navigation__link" href="assets/htdocs/playlists.html">Show/Go to Playlist</a></li>
         </ul>
         <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored add-playlist">
-                <i class="material-icons">playlist_add</i>
+                <i class="material-icons play-add">playlist_add</i>
         </button>
       </div>
     <script src="assets/js/app.js" defer></script>

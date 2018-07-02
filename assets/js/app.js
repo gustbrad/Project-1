@@ -196,6 +196,7 @@ $(document).on('click', '.lyrics-search-result', function (e) {
 		console.log(data)
 		var letterP = $('<p>');
 		letterP.text(data.message.body.lyrics.lyrics_body);
+		searchResultsLyrics.empty();
 		searchResultsLyrics.append(letterP);
 		searchYoutube(songName, pT);
 	});
@@ -209,5 +210,10 @@ $(document).on('click', '.hide', function (e) {
 
 $(document).on('click', '.show', function (e) {
 	$(".mdl-card").show();
+});
+
+$(document).on('click', '.play-add', function (e) { // button to add song to playlist
+	
+
 });
 

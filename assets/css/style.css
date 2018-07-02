@@ -35,6 +35,12 @@ body {
   margin-top: 250px;
 }
 
+.playlist-song {
+  color: white;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 /** Classes for displaying youtube search results */
 #yt-search-results {
   padding: .2em;

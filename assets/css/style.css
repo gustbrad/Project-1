@@ -35,9 +35,13 @@ body {
   margin-top: 250px;
 }
 
+#searchBtn {
+  margin-right: 1em;
+}
+#welcome {
+  margin-left: 1em;
+}
 .playlist-song {
-  color: white;
-  text-decoration: underline;
   cursor: pointer;
 }
 

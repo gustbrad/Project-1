@@ -81,7 +81,6 @@ getPlaylists();
 $(document).on('click', '.playlist-song', function() {
 
 	playPlaylistSong($(this).attr('data-song-id'), $(this).attr('data-lyrics-id'))
-	// $('.mdl-layout__drawer').MaterialLayout.toggleDrawer();
 	var d = document.querySelector('.mdl-layout');
 	d.MaterialLayout.toggleDrawer();
 });
@@ -345,6 +344,11 @@ $(document).on('click', '.hide', function (e) {
 
 $(document).on('click', '.show', function (e) {
 	$(".mdl-card").show();
+});
+
+$(document).on('click', '.playlist', function (e) {
+	var d = document.querySelector('.mdl-layout');
+	d.MaterialLayout.toggleDrawer();
 });
 
 $('#add-playlist').on('click', function (e) { // button to add song to playlist

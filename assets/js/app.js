@@ -33,6 +33,14 @@ $(".mdl-card").hide(); // Hides the results card at the beginning
 $(".mdl-card1").hide(); // Hides the video player card at the beginning
 $(".mdl-card-lyrics").hide(); // Hides the lyrics card at the beginning
 
+function setPlaceHolder(){
+	var t1 = document.getElementById("search-input");
+	t1.parentElement.MaterialTextfield.change("Search for a Song");
+	state2 = "song";
+	$('.mdl-textfield__label, .mdl-textfield_input, .crazy').css("color", "blue");
+
+}
+
 function getPlaylists() {
 	// console.log(usersChannel)
 	if(usersChannel.id !== null) {
@@ -335,3 +343,10 @@ $(document).on('click', '.toggle1', function (e) { // button to add toggle bewte
 		$('.mdl-textfield__label, .mdl-textfield_input, .crazy').css("color", "blue");
 	}
 });
+
+
+
+$('input:text').focus(
+    function(){
+        $(this).val('');
+    });

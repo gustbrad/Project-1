@@ -41,12 +41,12 @@ function getPlaylists() {
 			let playlistDiv = $('#saved-music').empty();	
 			for (const song in playlist) {
 				const { artist, songId, lyricsId, songName } = playlist[song]
-				const p = $('<p>').addClass('playlist-song').attr({ 
+				const li = $('<p>').addClass('playlist-song mdl-navigation__link').attr({ 
 					id: song, href: '#', 
 					'data-lyrics-id': lyricsId, 
 					'data-song-id': songId, 
 				}).text(songName)
-				playlistDiv.append(p);
+				playlistDiv.append(li);
 			}
 		});
 	}else{
@@ -59,6 +59,7 @@ getPlaylists()
 $(document).on('click', '.playlist-song', function() {
 
 	playPlaylistSong($(this).attr('data-song-id'), $(this).attr('data-lyrics-id'))
+	// $('.mdl-layout__drawer').MaterialLayout.toggleDrawer();
 });
 
 function playPlaylistSong(songId, lyricId) {

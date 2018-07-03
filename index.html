@@ -51,7 +51,7 @@
                             <input class="mdl-textfield__input crazy" type="text" id="search-input">
                             <label class="mdl-textfield__label crazy1" for="search-input">Search for a Song...</label>
                         </div>    
-                        <button class="mdl-button mdl-js-button mdl-button--icon">
+                        <button id="searchBtn" class="mdl-button mdl-js-button mdl-button--icon">
                             <i class="material-icons" id="search-button">search</i>
                         </button>   
                     </form>
@@ -63,12 +63,9 @@
             </div>
         </header>
         <div class="mdl-layout__drawer">
-            <span class="mdl-layout-title">Title</span>
-            <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" href="assets/htdocs/playlists.html">Saved Mehzic</a>
-            <a class="mdl-navigation__link" href="">Link</a>
-            <a class="mdl-navigation__link" href="">Link</a>
-            <a class="mdl-navigation__link" href="">Link</a>
+            <span class="mdl-layout-title">Your Playlist</span>
+            <nav id="saved-music" class="mdl-navigation">
+                <p>You have no saved music, start saving by pressing the add to playlist button!</p>
             </nav>
         </div>
            
@@ -110,9 +107,7 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="clearfix"></div> -->
-        <div id="saved-music"></div>
-        
+
 
         <!-- Right aligned menu on top of button  -->
         <button id="menu-top-right"

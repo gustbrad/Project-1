@@ -66,9 +66,30 @@ function playPlaylistSong(songId, lyricId) {
 	setYtPlayer(songId);
 	setLyrics(lyricId);
 }
-function setLyrics(id) {
 
+function setLyrics(id) {
+	$.ajax({
+		type: 'GET',
+		data: {
+			apikey: '837d23235a55ecdf0d0c33f76c0c1051',
+			track_id: id,
+			format: 'jsonp',
+			callback: 'jsonp_callback'
+		},
+		url: 'https://api.musixmatch.com/ws/1.1/track.lyrics.get',
+		dataType: 'jsonp',
+		jsonpCallback: 'jsonp_callback',
+		contentType: 'application/json',
+
+	}).then(function (data) {
+		var letterP = $('<p>').addClass('lyrics');
+		letterP.text(data.message.body.lyrics.lyrics_body);
+		searchResultsLyrics.empty();
+		searchResultsLyrics.append(letterP);
+		$(".mdl-card-lyrics").show();
+	}).catch(err=>console.log(err));
 }
+
 function setYtPlayer(id) {
 	ytPlayer.attr({src: `https://www.youtube.com/embed/${id}?autoplay=1`})
 	$('.mdl-card1').show();

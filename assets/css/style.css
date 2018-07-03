@@ -28,7 +28,7 @@ body {
   background-color: blue;
   position: absolute;
   bottom: 1rem;
-  right: 5rem;
+  right: 7rem;
 }
 
 #demo-menu-top-right {
@@ -138,9 +138,6 @@ body {
 .mdl-textfield__label, .mdl-textfield_input, .crazy{
   color: blue;
 }
-
-
-
 
 .mdl-card-lyrics{
   background: black;

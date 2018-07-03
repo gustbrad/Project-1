@@ -30,7 +30,10 @@ body {
   bottom: 1rem;
   right: 5rem;
 }
+.danger {
+  color: red;
 
+}
 #demo-menu-top-right {
   margin-top: 250px;
 }

@@ -48,21 +48,35 @@ function getPlaylists() {
 			let playlist = snap.val();
 			let playlistDiv = $('#saved-music').empty();	
 			for (const song in playlist) {
-				const { artist, songId, lyricsId, songName } = playlist[song]
-				const li = $('<p>').addClass('playlist-song mdl-navigation__link').attr({ 
+				const { artist, songId, lyricsId, songName } = playlist[song];
+				const div = $('<div>').addClass('mdl-navigation__link')
+				const delBtn = $('<i>').addClass('material-icons float-right danger del').text('close').attr({
+					'data-song': song
+				})
+				const li = $('<span>').addClass('playlist-song float-left').attr({ 
 					id: song, href: '#', 
 					'data-lyrics-id': lyricsId, 
 					'data-song-id': songId, 
-				}).text(songName)
-				playlistDiv.append(li);
+				}).text(songName).append(delBtn)
+				div.append(li).append(delBtn);
+				playlistDiv.append(div);
+				
 			}
 		});
 	}else{
 		console.log('Waiting...')
 		setTimeout(getPlaylists, 100)
 	}
+	
 }
-getPlaylists()
+$(document).on('click', '.del', function() {
+	const songId = $(this).attr('data-song');
+	playlistsRef.child(`${usersChannel.id}/1/${songId}`).remove();
+	getPlaylists()
+});
+
+getPlaylists();
+
 
 $(document).on('click', '.playlist-song', function() {
 
@@ -134,6 +148,24 @@ $('#search-input').bind('keydown', function (event) {
 			break;
 	}
 });
+
+function addToPlaylist() {
+	if(usersChannel.id === null) { return console.log('Please sign in first') };
+	for (const key in currentItem) {
+		if (currentItem[key] === null) { return console.log('please pick a song first') }
+	}
+	// console.log(usersChannel, currentItem)
+	let { lyricsId, songId, songName, artist } = currentItem;
+	// console.log(lyricId)
+	playlistsRef.child(`${usersChannel.id}/1`).push().set({ // dbRef/playlists/{usersChannel.id}/1/{newKey}
+		songName,
+		artist,
+		songId,
+		lyricsId
+	}).catch(err=>console.log(err));
+	getPlaylists();
+}
+
 //Prevent pasting  of special characters into search input
 $('#search-input').on({
 	keydown: function (e) {
@@ -180,6 +212,7 @@ function displayResults(results) {
 		searchResults.show();
 	}
 };
+
 $(document).on('click', '.youtube-search-result', function (e) {
 	let VIDEO_ID = $(this).attr('data-id');
 	currentItem.songName = $(this).attr('data-song');
@@ -189,7 +222,7 @@ $(document).on('click', '.youtube-search-result', function (e) {
 	$(".mdl-card").hide(); // hides the reults list
 	$(".mdl-card1").show(); // shows the results card after search is entered
 	$(".mdl-card-lyrics").show(); // shows the results card after search is entered
-})
+});
 
 searchBtn.on('click', function (e) {
 	e.preventDefault();
@@ -236,7 +269,7 @@ searchBtn.on('click', function (e) {
 				searchResults.append(letterP);
 			}
 			searchResults.show();
-		});
+		}).catch(err=>console.log(err));
 	}
 	else if(state2 === "artist"){
 		$.ajax({ 	// Perfoming an AJAX GET request to our queryURL
@@ -267,7 +300,7 @@ searchBtn.on('click', function (e) {
 				searchResults.append(letterP);
 			}
 			searchResults.show();
-		});
+		}).catch(err=>console.log(err));
 	}
 	$(".mdl-card").show(); // shows the results card after search is entered
 });
@@ -300,9 +333,8 @@ $(document).on('click', '.lyrics-search-result', function (e) {
 		searchResultsLyrics.empty();
 		searchResultsLyrics.append(letterP);
 		searchYoutube(songName, pT);
-	});
+	}).catch(err=>console.log(err));
 	searchResults.hide();
-
 });
 
 $(document).on('click', '.hide', function (e) {
@@ -314,20 +346,11 @@ $(document).on('click', '.show', function (e) {
 });
 
 $('#add-playlist').on('click', function (e) { // button to add song to playlist
-	if(usersChannel.id === null) { return console.log('Please sign in first') };
-	for (const key in currentItem) {
-		if (currentItem[key] === null) { return console.log('please pick a song first') }
-	}
-	// console.log(usersChannel, currentItem)
-	let { lyricsId, songId, songName, artist } = currentItem;
-	// console.log(lyricId)
-	playlistsRef.child(`${usersChannel.id}/1`).push().set({ // dbRef/playlists/{usersChannel.id}/1/{newKey}
-		songName,
-		artist,
-		songId,
-		lyricsId
-	}).catch(err=>console.log(err))
+	addToPlaylist();
 });
+$('.add').on('click', e => {
+	addToPlaylist();
+})
 
 $(document).on('click', '.toggle1', function (e) { // button to add toggle bewteen searching by song or artist
 	var state1 = $(this).attr('class')

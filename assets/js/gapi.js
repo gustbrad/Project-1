@@ -40,7 +40,6 @@ function updateSigninStatus(isSignedIn) {
 	if (isSignedIn) {
 		authorizeButton.hide();
 		signoutButton.show();
-		// getPlaylists();
 		getChannel();
 	} else {
 		authorizeButton.show();
@@ -60,36 +59,6 @@ function handleSignoutClick(event) {
 		views: null,
 		playlists: []
 	};
-}
-
-
-function getPlaylistItems() {
-	console.log(usersChannel.playlists[0].id)
-	gapi.client.youtube.playlistItems.list({
-		'part': 'snippet',
-		'playlistId': usersChannel.playlists[0].id,
-		'maxResults': 10
-	}).then(res => {
-		console.log(res)
-	}).catch(err => console.error(err.details));
-}
-
-function getPlaylists() {
-	gapi.client.youtube.playlists.list({
-		'part': 'snippet, contentDetails',
-		'mine': 'true'
-	}).then(res => {
-		usersChannel.playlists = [];
-		for (let playlist of res.result.items) {
-			if (playlist.kind === 'youtube#playlist') {
-				console.log(playlist);
-				usersChannel.playlists.push(playlist.id);
-			}
-		}
-		// getPlaylistItems();
-		let { id, kind, snippet, statistics, contentDetails } = res.result.items[0];
-		
-	}).catch(err => console.log(err));
 }
 
 function getChannel() {

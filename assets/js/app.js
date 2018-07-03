@@ -82,6 +82,8 @@ $(document).on('click', '.playlist-song', function() {
 
 	playPlaylistSong($(this).attr('data-song-id'), $(this).attr('data-lyrics-id'))
 	// $('.mdl-layout__drawer').MaterialLayout.toggleDrawer();
+	var d = document.querySelector('.mdl-layout');
+	d.MaterialLayout.toggleDrawer();
 });
 
 function playPlaylistSong(songId, lyricId) {

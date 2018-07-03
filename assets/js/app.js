@@ -22,7 +22,6 @@ currentItem = {
 	lyricsId: null
 }
 
-
 let state2 = "song"
 const searchResultsLyrics = $('#search-results-lyrics');
 const searchBtn = $('#search-button');
@@ -35,7 +34,7 @@ $(".mdl-card1").hide(); // Hides the video player card at the beginning
 $(".mdl-card-lyrics").hide(); // Hides the lyrics card at the beginning
 
 function getPlaylists() {
-	console.log(usersChannel)
+	// console.log(usersChannel)
 	if(usersChannel.id !== null) {
 		playlistsRef.child(usersChannel.id).child('1').once('value', snap => { // For Playlist Page
 			let playlist = snap.val();
@@ -51,16 +50,29 @@ function getPlaylists() {
 			}
 		});
 	}else{
-		console.log('waiting')
+		console.log('Waiting...')
 		setTimeout(getPlaylists, 100)
 	}
 }
 getPlaylists()
-function playPlaylistItem(item) {}
-$(document).on('click', '.playlist-song', function(e) {
 
-	console.log($(this))
-})
+$(document).on('click', '.playlist-song', function() {
+
+	playPlaylistSong($(this).attr('data-song-id'), $(this).attr('data-lyrics-id'))
+});
+
+function playPlaylistSong(songId, lyricId) {
+	console.log(songId, lyricId);
+	setYtPlayer(songId);
+	setLyrics(lyricId);
+}
+function setLyrics(id) {
+
+}
+function setYtPlayer(id) {
+	ytPlayer.attr({src: `https://www.youtube.com/embed/${id}?autoplay=1`})
+	$('.mdl-card1').show();
+}
 
 function greet(n) {
 	name = n || 'Guest';
@@ -110,14 +122,11 @@ $('#search-input').on({
 	},
 	paste: function (e) {
 		var stopPaste = function () {
-
 			this.value = this.value.replace(/[|&()]/g, '');
 		};
-
 		setTimeout(stopPaste.bind(this), 1);
 	}
 });
-
 
 function displayResults(results) {
 	let { items, kind, nextPageToken, prevPageToken, pageInfo } = results;
@@ -145,8 +154,8 @@ $(document).on('click', '.youtube-search-result', function (e) {
 	let VIDEO_ID = $(this).attr('data-id');
 	currentItem.songName = $(this).attr('data-song');
 	currentItem.songId = VIDEO_ID;
-	console.log(currentItem)
-	ytPlayer.attr({ src: `https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1` })
+	// console.log(currentItem)
+	setYtPlayer(VIDEO_ID);
 	$(".mdl-card").hide(); // hides the reults list
 	$(".mdl-card1").show(); // shows the results card after search is entered
 	$(".mdl-card-lyrics").show(); // shows the results card after search is entered
@@ -256,7 +265,7 @@ $(document).on('click', '.lyrics-search-result', function (e) {
 
 	}).then(function (data) {
 		// console.log(data)
-		var letterP = $('<p>');
+		var letterP = $('<p>').addClass('lyrics');
 		letterP.text(data.message.body.lyrics.lyrics_body);
 		searchResultsLyrics.empty();
 		searchResultsLyrics.append(letterP);
@@ -287,10 +296,8 @@ $('#add-playlist').on('click', function (e) { // button to add song to playlist
 		artist,
 		songId,
 		lyricsId
-	}).then(data => console.log(data)).catch(err=>console.log(err))
+	}).catch(err=>console.log(err))
 });
-
-
 
 $(document).on('click', '.toggle1', function (e) { // button to add toggle bewteen searching by song or artist
 	var state1 = $(this).attr('class')
@@ -307,7 +314,3 @@ $(document).on('click', '.toggle1', function (e) { // button to add toggle bewte
 		$('.mdl-textfield__label, .mdl-textfield_input, .crazy').css("color", "blue");
 	}
 });
-
-
-
-
